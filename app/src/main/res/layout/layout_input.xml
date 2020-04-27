@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp">
+	
+	
+	<TextView
+			android:text="label"
+			android:id="@+id/tv_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:fontFamily="@font/semi_bold"
+			android:lineSpacingExtra="4sp"
+			android:textColor="@color/blue_grey"
+			android:textSize="12sp"
+			android:textStyle="normal"/>
+	
+	
+	<EditText
+			android:textSize="16sp"
+			android:fontFamily="@font/regular"
+			android:textStyle="normal"
+			android:textColorHint="@color/slate_grey"
+			android:textColor="@color/white"
+			android:lineSpacingExtra="8sp"
+			android:paddingEnd="16dp"
+			android:paddingStart="16dp"
+			android:id="@+id/edit_text"
+			android:layout_width="match_parent"
+			android:layout_height="42dp"
+			android:layout_below="@id/tv_label"
+			android:background="@drawable/round_rectangle_stroke_grey"
+			android:inputType="textPassword"/>
+	
+	
+	<ImageView
+			android:id="@+id/iv_visibility"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/tv_label"
+			android:layout_alignParentEnd="true"
+			android:layout_margin="8dp"
+			android:src="@drawable/ic_visble"/>
+	
+	<TextView
+			
+			android:text="Error"
+			android:id="@+id/tv_error"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/edit_text"
+			android:layout_marginTop="4dp"
+			android:textSize="12sp"
+			android:fontFamily="@font/regular"
+			android:textStyle="normal"
+			android:textColor="@color/dark_pink"
+			android:lineSpacingExtra="4sp"
+	/>
+	<TextView
+			android:visibility="gone"
+			android:text="*Password must contain at least 6 characters"
+			android:id="@+id/tv_info"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/edit_text"
+			android:layout_marginTop="4dp"
+			android:textSize="10sp"
+			android:fontFamily="@font/regular"
+			android:textStyle="normal"
+			android:textColor="@color/slate_grey"
+			android:lineSpacingExtra="4sp"
+			/>
+</RelativeLayout>
+

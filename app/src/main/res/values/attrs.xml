@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<attr name="layout" format="reference"/>
+	<attr name="label" format="string"/>
+	
+	<declare-styleable name="ButtonIcon">
+		<attr name="layout"/>
+		<attr name="label"/>
+		<attr name="icon" format="reference"/>
+	</declare-styleable>
+	
+	<declare-styleable name="ButtonSocial">
+		<attr name="layout"/>
+		<attr name="label"/>
+	</declare-styleable>
+	
+	<declare-styleable name="Button">
+		<attr name="label"/>
+	</declare-styleable>
+	
+	<declare-styleable name="ComponentLoginResponse">
+		<attr name="success" format="reference"/>
+		<attr name="error" format="reference"/>
+	</declare-styleable>
+	
+</resources>
