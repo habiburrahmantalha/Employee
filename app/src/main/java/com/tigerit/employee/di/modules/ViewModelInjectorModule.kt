@@ -1,4 +1,5 @@
 package com.tigerit.employee.di.modules
+import com.tigerit.employee.ui.home.HomeVM
 import com.tigerit.employee.ui.splash.SplashVM
 import dagger.Component
 import javax.inject.Singleton
@@ -14,6 +15,7 @@ import javax.inject.Singleton
 interface ViewModelInjectorModule {
 
     fun inject(splashVM: SplashVM)
+    fun inject(homeVM: HomeVM)
 
 
     @Component.Builder

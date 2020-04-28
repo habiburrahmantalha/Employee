@@ -1,6 +1,8 @@
 package com.tigerit.employee
 
 import android.app.Application
+import com.tigerit.employee.db.Database
+import com.tigerit.employee.db.EmployeeRepository
 import com.tigerit.employee.di.components.DaggerAppComponent
 
 import dagger.android.AndroidInjector
@@ -20,6 +22,7 @@ class App : Application(), HasAndroidInjector {
             .application(this)
             .build()
             .inject(this)
+        EmployeeRepository.getInstance(Database.getInstance(this).employeeDAO)
     }
 
     override fun androidInjector(): AndroidInjector<Any> {

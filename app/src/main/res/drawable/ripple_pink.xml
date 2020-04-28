@@ -6,8 +6,8 @@
 		<shape android:shape="rectangle">
 			<stroke
 					android:width="1dp"
-					android:color="@color/faded_red" />
-			<solid android:color="@color/faded_red" />
+					android:color="@color/slate_grey" />
+			<solid android:color="@color/slate_grey" />
 			<size
 					android:width="8dp"
 					android:height="8dp" />
@@ -19,8 +19,8 @@
 		<shape android:shape="rectangle">
 			<stroke
 					android:width="1dp"
-					android:color="@color/dark_pink" />
-			<solid android:color="@color/dark_pink" />
+					android:color="@color/blue_grey" />
+			<solid android:color="@color/blue_grey" />
 			<size
 					android:width="8dp"
 					android:height="8dp" />

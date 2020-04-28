@@ -51,6 +51,9 @@ class Input @JvmOverloads constructor(context: Context, attrs: AttributeSet? = n
                 edit_text!!.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD
                 hidePassword()
             }
+            NUMBER -> {
+                edit_text!!.inputType = InputType.TYPE_CLASS_NUMBER
+            }
         }
         tv_error!!.visibility = View.INVISIBLE
         tv_error!!.text = errorText
@@ -73,9 +76,9 @@ class Input @JvmOverloads constructor(context: Context, attrs: AttributeSet? = n
             } else {
                 if (focused) {
                     edit_text!!.background =
-                        ContextCompat.getDrawable(context, R.drawable.round_rectangle_stroke_primary)
+                        ContextCompat.getDrawable(context, R.drawable.round_rectangle_focus)
                 } else {
-                    edit_text!!.background = ContextCompat.getDrawable(context, R.drawable.round_rectangle_stroke_grey)
+                    edit_text!!.background = ContextCompat.getDrawable(context, R.drawable.round_rectangle_unselected)
                 }
             }
         }
@@ -147,6 +150,11 @@ class Input @JvmOverloads constructor(context: Context, attrs: AttributeSet? = n
             } else {
                 hideError(context)
             }
+            NUMBER -> if (sequence.toString().isNotEmpty() && sequence.toString().toInt() > 100) {
+                showError(context)
+            } else {
+                hideError(context)
+            }
         }
         return isError
     }
@@ -166,7 +174,7 @@ class Input @JvmOverloads constructor(context: Context, attrs: AttributeSet? = n
     }
 
     private fun hideError(context: Context?) {
-        edit_text!!.background = ContextCompat.getDrawable(context!!, R.drawable.round_rectangle_stroke_grey)
+        edit_text!!.background = ContextCompat.getDrawable(context!!, R.drawable.round_rectangle_unselected)
         tv_error!!.visibility = View.INVISIBLE
         isError = false
     }
@@ -195,7 +203,7 @@ class Input @JvmOverloads constructor(context: Context, attrs: AttributeSet? = n
     }
 
     enum class EditTextType {
-        TEXT, EMAIL, PASSWORD, NAME
+        TEXT, EMAIL, PASSWORD, NAME, NUMBER
     }
 
     fun focus() {

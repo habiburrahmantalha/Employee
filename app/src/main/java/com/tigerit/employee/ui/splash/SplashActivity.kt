@@ -25,7 +25,7 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         GlobalScope.launch(context = Dispatchers.Main) {
-            delay(500)
+            delay(1000)
             navigateToHome()
         }
     }

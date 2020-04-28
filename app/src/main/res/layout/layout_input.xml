@@ -34,7 +34,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="42dp"
 			android:layout_below="@id/tv_label"
-			android:background="@drawable/round_rectangle_stroke_grey"
+			android:background="@drawable/round_rectangle_focus"
 			android:inputType="textPassword"/>
 	
 	
