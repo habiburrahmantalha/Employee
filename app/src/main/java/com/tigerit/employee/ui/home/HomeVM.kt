@@ -1,6 +1,5 @@
 package com.tigerit.employee.ui.home
 
-import android.net.Uri
 import android.os.Environment
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -31,8 +30,8 @@ class HomeVM @Inject constructor() : BaseViewModel() {
         loadData()
     }
 
-    fun exportDB() {
-        val sd: File = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+    fun exportDB(path: File?) {
+        Log.d("VM",path.toString())
         val data: File = Environment.getDataDirectory()
         var source: FileChannel? = null
         var destination: FileChannel? = null
@@ -40,14 +39,14 @@ class HomeVM @Inject constructor() : BaseViewModel() {
             "/data/com.tigerit.employee/databases/employeeDB"
         val backupDBPath: String = "employeeDB"
         val currentDB = File(data, currentDBPath)
-        val backupDB = File(sd, backupDBPath)
+        val backupDB = File(path, backupDBPath)
         try {
             source = FileInputStream(currentDB).getChannel()
             destination = FileOutputStream(backupDB).getChannel()
             destination.transferFrom(source, 0, source.size())
             source.close()
             destination.close()
-            Log.d("VM","Exported")
+            Log.d("VM","Exported"+path)
             fileResponseLiveData.postValue("DB exported to Download Folder")
             //Toast.makeText(this, "DB Exported!", Toast.LENGTH_LONG).show()
         } catch (e: IOException) {
@@ -55,30 +54,30 @@ class HomeVM @Inject constructor() : BaseViewModel() {
             fileResponseLiveData.postValue("DB exported failed")
         }
     }
-    fun importDB(uri: Uri) {
+    fun importDB(uri: String) {
         try {
-            val sd = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            Log.d("VM",sd.path+" "+uri.path)
+            Log.d("MV", uri)
+
             val data = Environment.getDataDirectory()
-            if (sd.canWrite()) {
-                val currentDBPath =
-                    "/data/com.tigerit.employee/databases/employeeDB"
-                val backupDBPath = "employeeDB"
-                val backupDB = File(data, currentDBPath)
-                val currentDB = File(uri.path!!.replace(backupDBPath,"").replace("/document/raw:",""), backupDBPath)
+
+            val currentDBPath =
+                "/data/com.tigerit.employee/databases/employeeDB"
+            val backupDBPath = "employeeDB"
+            val backupDB = File(data, currentDBPath)
+            val currentDB = File(uri.replace(backupDBPath,""), backupDBPath)
 
 
-                val src =
-                    FileInputStream(currentDB).channel
-                val dst =
-                    FileOutputStream(backupDB).channel
-                dst.transferFrom(src, 0, src.size())
-                src.close()
-                dst.close()
-                Log.d("VM","imported")
-                fileResponseLiveData.postValue("DB imported")
-                loadData()
-            }
+            val src =
+                FileInputStream(currentDB).channel
+            val dst =
+                FileOutputStream(backupDB).channel
+            dst.transferFrom(src, 0, src.size())
+            src.close()
+            dst.close()
+            Log.d("VM","imported")
+            fileResponseLiveData.postValue("DB imported")
+            loadData()
+
         } catch (e: Exception) {
             Log.d("VM","imported Failed"+e.localizedMessage)
             fileResponseLiveData.postValue("DB imported Failed")

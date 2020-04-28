@@ -3,6 +3,7 @@ package com.tigerit.employee.ui.home
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -18,6 +19,7 @@ import com.tigerit.employee.R
 import com.tigerit.employee.base.BaseActivity
 import com.tigerit.employee.di.ViewModelInjectionField
 import com.tigerit.employee.di.qualifiers.ViewModelInjection
+import com.tigerit.employee.ui.FileUtils
 import com.tigerit.employee.ui.add_employee.AddEmployeeActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -87,13 +89,16 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                     .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     .withListener(object : PermissionListener {
                         override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                            viewModel.get().exportDB()
+                            var path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+                            viewModel.get().exportDB(path)
                         }
                         override fun onPermissionRationaleShouldBeShown(
                             permission: PermissionRequest?,
                             token: PermissionToken?
                         ) {}
-                        override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
+                        override fun onPermissionDenied(response: PermissionDeniedResponse?) {
+                            Toast.makeText(this@MainActivity,response.toString(),Toast.LENGTH_LONG).show()
+                        }
                     }
                     )
                     .check()
@@ -139,9 +144,10 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             val selectedFile = data?.data
 
             selectedFile?.let {
-                Log.d("File m",it.path)
+                Log.d("File: ",FileUtils.getPath(this,it))
 
-                viewModel.get().importDB(it)
+
+                viewModel.get().importDB(FileUtils.getPath(this,it))
             }
         }
     }
